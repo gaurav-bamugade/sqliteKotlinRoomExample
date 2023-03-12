@@ -13,6 +13,9 @@ interface SubscriberDAO {
 
 
     //if there is an existing row that has the same id value it will delete it and replace it with new entitiy
+
+
+    //returns long to check how many row inserted of position
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSubscriber(subscriber: Subscriber):Long
 
@@ -31,13 +34,13 @@ interface SubscriberDAO {
     fun insertSubscriber(subscriber: Subscriber,subscribers: List<Subscriber>):List<Long>*/
 
     @Update
-    suspend fun  updateSubscriber(subscriber: Subscriber)
+    suspend fun  updateSubscriber(subscriber: Subscriber):Int
 
     @Delete
-    suspend fun deleteSubscriber(subscriber: Subscriber)
+    suspend fun deleteSubscriber(subscriber: Subscriber):Int
 
     @Query("DELETE FROM subscriber_data_table")
-    suspend fun deleteAll()
+    suspend fun deleteAll():Int
 
     @Query("SELECT * FROM subscriber_data_table")
     fun getAllSubscribers():LiveData<List<Subscriber>>
